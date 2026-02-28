@@ -366,7 +366,64 @@ const Home = () => {
         gl={{ alpha: false }}
       >
         <Suspense fallback={<Loader />}>
+          {/* ── Key light — warm top-down theatre spotlight ── */}
           <directionalLight position={[1, 1, 1]} intensity={1.5} />
+          <pointLight
+            position={[-0.7, 3, 1]}
+            intensity={8}
+            distance={10}
+            decay={2}
+            color="#ffeedd"
+          />
+
+          {/* ── Cool cyan front fill — face & desk illumination ── */}
+          <pointLight
+            position={[0.5, 1.2, 3]}
+            intensity={4}
+            distance={8}
+            decay={2}
+            color="#66ccff"
+          />
+
+          {/* ── Deep blue rim light — back-left edge separation ── */}
+          <pointLight
+            position={[-3, 2, -1]}
+            intensity={6}
+            distance={10}
+            decay={2}
+            color="#3344ff"
+          />
+
+          {/* ── Warm amber kicker — back-right for depth ── */}
+          <pointLight
+            position={[2, 1.5, -1.5]}
+            intensity={5}
+            distance={9}
+            decay={2}
+            color="#ff9944"
+          />
+
+          {/* ── Soft magenta under-glow — theatre stage feel ── */}
+          <pointLight
+            position={[-0.7, -0.3, 1.5]}
+            intensity={3}
+            distance={6}
+            decay={2}
+            color="#cc44aa"
+          />
+
+          {/* ── Subtle cyan top accent — overhead wash ── */}
+          <pointLight
+            position={[0, 4, 0]}
+            intensity={3}
+            distance={12}
+            decay={2}
+            color="#44eeff"
+          />
+
+          {/* ── Dim warm ambient to lift shadows slightly ── */}
+          <ambientLight intensity={0.15} color="#ffd6aa" />
+
           <OrbitControls
             enableZoom
             enablePan
