@@ -5,4 +5,5 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ["**/*.glb"],
+  base: "/M.Samuel.E_3D_Portfolio/",
 });
