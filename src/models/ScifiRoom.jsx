@@ -13,6 +13,7 @@ import * as THREE from "three";
 
 import scifiComputerRoom from "../assets/public/sci-fi_computer_room.glb";
 import sammyPhoto from "../assets/SammyW.png";
+import sammy1Photo from "../assets/Sammy1.jpg";
 import audio from "../utils/audioManager";
 
 const ScifiRoom = ({
@@ -105,7 +106,7 @@ const ScifiRoom = ({
                 }}
               >
                 <img
-                  src="/Sammy1.jpg"
+                  src={sammy1Photo}
                   alt="Sammy"
                   className="w-full h-full object-cover"
                 />
