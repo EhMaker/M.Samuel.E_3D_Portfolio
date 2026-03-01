@@ -415,14 +415,14 @@ const Home = () => {
           {/* ── Subtle cyan top accent — overhead wash ── */}
           <pointLight
             position={[0, 4, 0]}
-            intensity={3}
+            intensity={5}
             distance={12}
             decay={2}
             color="#44eeff"
           />
 
           {/* ── Dim warm ambient to lift shadows slightly ── */}
-          <ambientLight intensity={0.15} color="#ffd6aa" />
+          <ambientLight intensity={0.7} color="#ffd6aa" />
 
           <OrbitControls
             enableZoom

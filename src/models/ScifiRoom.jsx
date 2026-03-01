@@ -32,7 +32,17 @@ const ScifiRoom = ({
   const [monitorHovered, setMonitorHovered] = useState(false);
   const [keyboardHovered, setKeyboardHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+  const deskLightRef = useRef();
   const photoTexture = useTexture(sammyPhoto);
+
+  // Point the desk directional light at the desk mesh origin
+  useEffect(() => {
+    if (deskLightRef.current) {
+      deskLightRef.current.target.position.set(0, 0, 0);
+      deskLightRef.current.target.updateMatrixWorld();
+      scene.add(deskLightRef.current.target);
+    }
+  }, [scene]);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768);
@@ -163,6 +173,13 @@ const ScifiRoom = ({
         intensity={5}
         distance={6}
         position={[1, 2, -1]}
+      />
+      {/* Directional light from above the desk, aimed at Object_2 (Desk) */}
+      <directionalLight
+        ref={deskLightRef}
+        position={[0, 4, 0]}
+        intensity={2}
+        color="#ffffff"
       />
       <group rotation={[-Math.PI / 2, 0, 0]} scale={0.987}>
         <mesh

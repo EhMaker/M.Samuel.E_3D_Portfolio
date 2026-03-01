@@ -17,7 +17,7 @@ import { useThree, useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 
 /* ── target values (must match the Canvas defaults) ────────── */
-const FINAL_POS = { x: -4, y: 0.7, z: 3.0 };
+const FINAL_POS = { x: -4, y: 0.2, z: 3.0 };
 const FINAL_TARGET = { x: -0.7, y: 0.0, z: 0.5 };
 
 /* ── starting values (camera is CREATED here via Canvas props) */
@@ -52,7 +52,7 @@ const CameraIntro = ({ playing, readyPromise, onComplete }) => {
 
     /* ── Responsive pull-back: same viewing angle, more distance on mobile ── */
     const isMobile = window.innerWidth < 768;
-    const pullBack = isMobile ? 2.5 : 1.0;
+    const pullBack = isMobile ? 2.2 : 1.8;
     const finalPos = {
       x: FINAL_TARGET.x + (FINAL_POS.x - FINAL_TARGET.x) * pullBack,
       y: FINAL_TARGET.y + (FINAL_POS.y - FINAL_TARGET.y) * pullBack,
