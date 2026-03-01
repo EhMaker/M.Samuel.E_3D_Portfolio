@@ -1,8 +1,7 @@
 import React, { Suspense, useState, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import Loader from "../components/Loader";
 import CameraController from "../components/CameraController";
 import CameraIntro from "../components/CameraIntro";
 import ScifiRoom from "../models/ScifiRoom";
@@ -10,6 +9,10 @@ import WelcomeLoader from "../components/WelcomeLoader";
 import audio from "../utils/audioManager";
 import sammyPhoto from "../assets/Sammy1.jpg";
 import * as THREE from "three";
+import scifiComputerRoom from "../assets/public/sci-fi_computer_room.glb";
+
+/* Eagerly preload the GLB so it downloads while the WelcomeLoader plays */
+useGLTF.preload(scifiComputerRoom);
 
 const projects = [
   {
@@ -363,9 +366,15 @@ const Home = () => {
           position: [2, 12, 10],
           fov: 35,
         }}
-        gl={{ alpha: false }}
+        dpr={[1, 1.5]}
+        performance={{ min: 0.5 }}
+        gl={{
+          alpha: false,
+          powerPreference: "high-performance",
+          antialias: false,
+        }}
       >
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={null}>
           {/* ── Key light — warm top-down theatre spotlight ── */}
           <directionalLight position={[1, 1, 1]} intensity={1.5} />
           <pointLight
