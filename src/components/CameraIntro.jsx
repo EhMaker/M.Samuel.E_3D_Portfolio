@@ -50,6 +50,15 @@ const CameraIntro = ({ playing, readyPromise, onComplete }) => {
   useEffect(() => {
     if (!playing) return;
 
+    /* ── Responsive pull-back: same viewing angle, more distance on mobile ── */
+    const isMobile = window.innerWidth < 768;
+    const pullBack = isMobile ? 2.5 : 1.0;
+    const finalPos = {
+      x: FINAL_TARGET.x + (FINAL_POS.x - FINAL_TARGET.x) * pullBack,
+      y: FINAL_TARGET.y + (FINAL_POS.y - FINAL_TARGET.y) * pullBack,
+      z: FINAL_TARGET.z + (FINAL_POS.z - FINAL_TARGET.z) * pullBack,
+    };
+
     cancelledRef.current = false;
     const ctrl = controls;
 
@@ -88,7 +97,7 @@ const CameraIntro = ({ playing, readyPromise, onComplete }) => {
           }
         },
         onComplete: () => {
-          camera.position.set(FINAL_POS.x, FINAL_POS.y, FINAL_POS.z);
+          camera.position.set(finalPos.x, finalPos.y, finalPos.z);
           if (ctrl) {
             ctrl.target.set(FINAL_TARGET.x, FINAL_TARGET.y, FINAL_TARGET.z);
             ctrl.enabled = true;
@@ -101,9 +110,9 @@ const CameraIntro = ({ playing, readyPromise, onComplete }) => {
       tl.to(
         proxy,
         {
-          cx: FINAL_POS.x,
-          cy: FINAL_POS.y,
-          cz: FINAL_POS.z,
+          cx: finalPos.x,
+          cy: finalPos.y,
+          cz: finalPos.z,
           arc: 1,
           duration: 2.8,
           ease: "power2.inOut",

@@ -31,7 +31,14 @@ const ScifiRoom = ({
   const [hovered, setHovered] = useState(false);
   const [monitorHovered, setMonitorHovered] = useState(false);
   const [keyboardHovered, setKeyboardHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const photoTexture = useTexture(sammyPhoto);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   useEffect(() => {
     // Pure black void — no color, no skybox
@@ -89,7 +96,7 @@ const ScifiRoom = ({
       {/* Identity Card inside the 3D scene */}
       {!hideCard && (
         <Html
-          position={[-0.6, 0.3, 1.8]}
+          position={[-0.6, 0.3, isMobile ? 1.3 : 1.8]}
           rotation={[0, -1.0, 0]}
           distanceFactor={1.5}
           transform

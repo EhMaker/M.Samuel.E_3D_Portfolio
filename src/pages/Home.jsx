@@ -71,7 +71,6 @@ const Home = () => {
 
   const monitorTarget = new THREE.Vector3(-1.3, 0.35, 1.9);
   const posterTarget = new THREE.Vector3(-1.4, 0.7, 1.2);
-  const keyboardTarget = new THREE.Vector3(-1.1, 0.15, 2.2);
 
   const handleMonitorClick = useCallback(() => {
     audio.playClickSound();
@@ -87,13 +86,6 @@ const Home = () => {
     setZooming(true);
   }, []);
 
-  const handleKeyboardClick = useCallback(() => {
-    audio.playClickSound();
-    setZoomTarget(keyboardTarget);
-    setZoomAction("skills");
-    setZooming(true);
-  }, []);
-
   const handleZoomComplete = useCallback(() => {
     setZooming(false);
     zoomedInRef.current = true;
@@ -101,8 +93,6 @@ const Home = () => {
       setShowProjects(true);
     } else if (zoomAction === "about") {
       setShowAbout(true);
-    } else if (zoomAction === "skills") {
-      setShowSkills(true);
     }
   }, [zoomAction]);
 
@@ -455,7 +445,10 @@ const Home = () => {
           <ScifiRoom
             onPosterClick={handlePosterClick}
             onMonitorClick={handleMonitorClick}
-            onKeyboardClick={handleKeyboardClick}
+            onKeyboardClick={() => {
+              audio.playClickSound();
+              setShowSkills(true);
+            }}
             hideCard={
               showAbout ||
               showSkills ||
