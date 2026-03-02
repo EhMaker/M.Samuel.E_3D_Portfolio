@@ -20,6 +20,7 @@ const ScifiRoom = ({
   onPosterClick,
   onMonitorClick,
   onKeyboardClick,
+  onContactClick,
   showLoading,
   loadingText,
   hideCard,
@@ -151,13 +152,17 @@ const ScifiRoom = ({
               )}
             </div>
             {/* CTA Button */}
-            <a
-              href="/contact"
-              onClick={() => audio.playClickSound()}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                audio.playClickSound();
+                if (onContactClick) onContactClick();
+              }}
               className="block w-full text-center py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:from-cyan-400 hover:to-blue-500 hover:shadow-cyan-400/40 transition-all duration-300"
             >
               Let's Work Together →
-            </a>
+            </button>
           </div>
         </Html>
       )}

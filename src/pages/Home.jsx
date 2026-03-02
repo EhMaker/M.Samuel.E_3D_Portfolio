@@ -4,6 +4,8 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import CameraController from "../components/CameraController";
 import CameraIntro from "../components/CameraIntro";
+import ContactSection from "../components/ContactSection";
+import ProjectsSection from "../components/ProjectsSection";
 import ScifiRoom from "../models/ScifiRoom";
 import WelcomeLoader from "../components/WelcomeLoader";
 import audio from "../utils/audioManager";
@@ -66,6 +68,7 @@ const Home = () => {
   const [showAbout, setShowAbout] = useState(false);
   const [showSkills, setShowSkills] = useState(false);
   const [showProjects, setShowProjects] = useState(false);
+  const [showContact, setShowContact] = useState(false);
   const [zooming, setZooming] = useState(false);
   const [returning, setReturning] = useState(false);
   const [zoomTarget, setZoomTarget] = useState(null);
@@ -105,6 +108,7 @@ const Home = () => {
     setShowAbout(false);
     setShowSkills(false);
     setShowProjects(false);
+    setShowContact(false);
     if (zoomedInRef.current) {
       setReturning(true);
       zoomedInRef.current = false;
@@ -148,27 +152,58 @@ const Home = () => {
 
       {/* About Me Overlay */}
       {showAbout && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="bg-gray-900/90 border border-cyan-500/30 rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl shadow-cyan-500/10 text-white relative">
+        <section
+          className="absolute inset-0 z-20 flex items-center justify-center bg-black/70 backdrop-blur-md"
+          role="dialog"
+          aria-modal="true"
+          aria-label="About me"
+        >
+          <div className="relative w-full max-w-md mx-4">
+            {/* Close button */}
             <button
               onClick={handleCloseSection}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-bold transition-colors"
+              aria-label="Close about section"
+              className="absolute -top-2 -right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-gray-800/80 border border-gray-600/40 text-gray-400 hover:text-white hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 text-lg font-bold"
             >
               &times;
             </button>
-            <h2 className="text-3xl font-bold mb-4 text-cyan-400">About Me</h2>
-            <p className="text-gray-300 leading-relaxed mb-4">
-              Hi, I'm Sammy! I'm a passionate developer who loves building
-              creative and immersive web experiences. I specialize in front-end
-              development with React, Three.js, and modern web technologies.
-            </p>
-            <p className="text-gray-300 leading-relaxed">
-              I enjoy transforming ideas into interactive 3D experiences and
-              crafting beautiful user interfaces. Feel free to explore my
-              portfolio and reach out if you'd like to collaborate!
-            </p>
+
+            {/* Card */}
+            <div className="bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-gray-950/95 border border-cyan-500/20 rounded-2xl p-8 shadow-2xl shadow-cyan-500/5">
+              {/* Header */}
+              <header className="text-center mb-6">
+                <h2 className="text-2xl font-extrabold text-white tracking-wide mb-1">
+                  About Me
+                </h2>
+                <p className="text-gray-400 text-xs tracking-wide">
+                  Developer &amp; creative technologist
+                </p>
+                {/* Decorative line */}
+                <div className="mt-4 mx-auto w-16 h-0.5 rounded-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+              </header>
+
+              {/* Bio */}
+              <div className="space-y-4">
+                <p className="text-gray-300 text-sm leading-relaxed tracking-wide">
+                  Hi, I'm Sammy! I'm a passionate developer who loves building
+                  creative and immersive web experiences. I specialize in
+                  front-end development with React, Three.js, and modern web
+                  technologies.
+                </p>
+                <p className="text-gray-300 text-sm leading-relaxed tracking-wide">
+                  I enjoy transforming ideas into interactive 3D experiences and
+                  crafting beautiful user interfaces. Feel free to explore my
+                  portfolio and reach out if you'd like to collaborate!
+                </p>
+              </div>
+
+              {/* Footer tagline */}
+              <p className="text-center text-gray-500 text-[10px] mt-6 tracking-wider uppercase">
+                Crafting the future, one pixel at a time
+              </p>
+            </div>
           </div>
-        </div>
+        </section>
       )}
 
       {/* Skills Overlay */}
@@ -256,106 +291,17 @@ const Home = () => {
 
       {/* Projects Overlay */}
       {showProjects && (
-        <div className="absolute inset-0 z-20 overflow-y-auto bg-black/70 backdrop-blur-sm">
-          <div className="max-w-4xl mx-auto px-6 py-12 relative">
-            <button
-              onClick={handleCloseSection}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-bold transition-colors z-10"
-            >
-              &times;
-            </button>
-            <h2 className="text-3xl font-bold mb-2 text-cyan-400">Projects</h2>
-            <p className="text-gray-400 text-sm mb-8 max-w-xl">
-              A selection of work that reflects my passion for building
-              meaningful, well-crafted digital experiences.
-            </p>
-            <div className="space-y-8">
-              {projects.map((project, index) => (
-                <article
-                  key={index}
-                  className="group bg-gray-900/80 border border-gray-700/40 hover:border-cyan-500/30 rounded-2xl p-6 transition-all duration-500 shadow-lg hover:shadow-cyan-500/10"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <span className="text-cyan-500/40 text-4xl font-black leading-none select-none">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                        {project.name}
-                      </h3>
-                      <p className="text-gray-400 text-xs mt-1">
-                        {project.description}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-5 mt-4">
-                    <div className="space-y-1.5">
-                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-cyan-400/70">
-                        The Problem
-                      </h4>
-                      <p className="text-gray-300 text-xs leading-relaxed">
-                        {project.problem}
-                      </p>
-                    </div>
-                    <div className="space-y-1.5">
-                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-cyan-400/70">
-                        My Solution
-                      </h4>
-                      <p className="text-gray-300 text-xs leading-relaxed">
-                        {project.solution}
-                      </p>
-                    </div>
-                    <div className="space-y-1.5">
-                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-cyan-400/70">
-                        My Role
-                      </h4>
-                      <p className="text-gray-300 text-xs leading-relaxed">
-                        {project.role}
-                      </p>
-                    </div>
-                    <div className="space-y-1.5">
-                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-cyan-400/70">
-                        Technologies
-                      </h4>
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2.5 py-0.5 text-[10px] font-semibold rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex gap-3 mt-6 pt-4 border-t border-gray-700/40">
-                    {project.links.demo && (
-                      <a
-                        href={project.links.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-[11px] font-bold tracking-wide shadow-lg shadow-cyan-500/20 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300"
-                      >
-                        Live Demo ↗
-                      </a>
-                    )}
-                    {project.links.repo && (
-                      <a
-                        href={project.links.repo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-xl border border-gray-600 text-gray-300 text-[11px] font-bold tracking-wide hover:border-cyan-500/50 hover:text-cyan-300 transition-all duration-300"
-                      >
-                        Source Code ↗
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
+        <ProjectsSection projects={projects} onClose={handleCloseSection} />
+      )}
+
+      {/* Contact & Credibility Overlay */}
+      {showContact && (
+        <ContactSection
+          onClose={() => {
+            audio.playClickSound();
+            setShowContact(false);
+          }}
+        />
       )}
 
       <Canvas
@@ -458,10 +404,14 @@ const Home = () => {
               audio.playClickSound();
               setShowSkills(true);
             }}
+            onContactClick={() => {
+              setShowContact(true);
+            }}
             hideCard={
               showAbout ||
               showSkills ||
               showProjects ||
+              showContact ||
               zooming ||
               returning ||
               introPlaying ||
