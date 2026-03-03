@@ -19,9 +19,10 @@
  */
 
 /* ── Audio file paths (from /public/audio/) ────────────────── */
-const WELCOME_SRC = "/audio/LoadingPage sound.mp3";
-const CLICK_SRC = "/audio/Mouse Click Sound Effect.mp3";
-const SCENE_SRC = "/audio/Techroom backgound sound.mp3";
+const BASE = import.meta.env.BASE_URL; // e.g. "/M.Samuel.E_3D_Portfolio/"
+const WELCOME_SRC = `${BASE}audio/loadingpage-sound.mp3`;
+const CLICK_SRC = `${BASE}audio/mouse-click-sound.mp3`;
+const SCENE_SRC = `${BASE}audio/techroom-background-sound.mp3`;
 
 /* ── Eager audio creation ──────────────────────────────────── */
 function makeAudio(src, { volume = 1, loop = false } = {}) {
