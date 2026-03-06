@@ -34,6 +34,8 @@ const ScifiRoom = ({
   const [keyboardHovered, setKeyboardHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const deskLightRef = useRef();
+  const cardGroupRef = useRef();
+  const cardBgRef = useRef();
   const photoTexture = useTexture(sammyPhoto);
 
   // Point the desk directional light at the desk mesh origin
@@ -69,6 +71,31 @@ const ScifiRoom = ({
       materials.Emission_Blue.needsUpdate = true;
     }
   }, [materials, scene]);
+
+  // Billboard the identity card on Y-axis & adjust opacity on zoom
+  useFrame(({ camera }) => {
+    if (cardGroupRef.current) {
+      // Get card world position
+      const cardPos = new THREE.Vector3();
+      cardGroupRef.current.getWorldPosition(cardPos);
+      // Compute Y-axis rotation to face camera
+      const dx = camera.position.x - cardPos.x;
+      const dz = camera.position.z - cardPos.z;
+      cardGroupRef.current.rotation.y = Math.atan2(dx, dz);
+
+      // Adjust opacity based on distance (closer = more transparent)
+      const dist = camera.position.distanceTo(cardPos);
+      const opacity = THREE.MathUtils.clamp(
+        THREE.MathUtils.mapLinear(dist, 2, 6, 0.55, 0.95),
+        0.55,
+        0.95,
+      );
+      // Update DOM directly to avoid React re-render flicker
+      if (cardBgRef.current) {
+        cardBgRef.current.style.background = `linear-gradient(to bottom right, rgba(17,24,39,${opacity}), rgba(17,24,39,${opacity * 0.95}), rgba(3,7,18,${opacity}))`;
+      }
+    }
+  });
 
   // Apply photo texture to a cloned Posters material
   const postersMaterial = React.useMemo(() => {
@@ -106,80 +133,99 @@ const ScifiRoom = ({
       {/* Light blue point lights for Desk and Monitor areas */}
       {/* Identity Card inside the 3D scene */}
       {!hideCard && (
-        <Html
-          position={[-0.6, 0.3, isMobile ? 1.3 : 1.8]}
-          rotation={[0, -1.0, 0]}
-          distanceFactor={1.5}
-          transform
-          style={{ pointerEvents: "auto" }}
-        >
-          <div className="w-[300px] bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-gray-950/95 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-6 shadow-2xl shadow-cyan-500/5">
-            {/* Photo with top-left and bottom-right slanty */}
-            <div className="w-full flex justify-center mb-4">
+        <group ref={cardGroupRef} position={[-0.6, 0.3, isMobile ? 1.3 : 1.8]}>
+          <Html
+            position={[0, 0, 0]}
+            distanceFactor={1.5}
+            scale={0.35}
+            transform
+            style={{ pointerEvents: "auto" }}
+          >
+            <div
+              style={{
+                transform: "scale(2.85)",
+                transformOrigin: "center center",
+              }}
+            >
               <div
-                className="w-28 h-28 overflow-hidden border-2 border-cyan-400/40 shadow-lg shadow-cyan-500/20
-                  transition-all duration-300 hover:scale-[1.06] hover:shadow-xl hover:shadow-cyan-500/30"
+                ref={cardBgRef}
+                className="w-[300px] border border-cyan-500/20 rounded-2xl p-6 shadow-2xl shadow-cyan-500/5"
                 style={{
-                  borderRadius: "20px 5px 20px 5px",
+                  background: `linear-gradient(to bottom right, rgba(17,24,39,0.95), rgba(17,24,39,0.9), rgba(3,7,18,0.95))`,
                 }}
               >
-                <img
-                  src={sammy1Photo}
-                  alt="Monday Samuel"
-                  className="w-full h-full object-cover object-[center_15%]"
-                />
-              </div>
-            </div>
-            {/* Name */}
-            <h1 className="text-xl font-extrabold text-white text-center tracking-wide mb-1">
-              Monday Samuel
-            </h1>
-            {/* Decorative line */}
-            <div className="mt-2 mb-3 mx-auto w-12 h-0.5 rounded-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-            {/* Tagline */}
-            <p className="text-gray-400 text-xs text-center tracking-wide mb-4">
-              I build immersive 3D web experiences that captivate &amp; convert.
-            </p>
-            {/* Tech Stack */}
-            <div className="flex flex-wrap justify-center gap-1.5 mb-5">
-              {[
-                "Flutter",
-                "React",
-                "Three.js",
-                "Tailwind",
-                "Node.js",
-                "JS",
-              ].map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2.5 py-0.5 text-[10px] font-semibold rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 tracking-wide
+                {/* Photo with top-left and bottom-right slanty */}
+                <div className="w-full flex justify-center mb-4">
+                  <div
+                    className="w-28 h-28 overflow-hidden border-2 border-cyan-400/40 shadow-lg shadow-cyan-500/20
+                  transition-all duration-300 hover:scale-[1.06] hover:shadow-xl hover:shadow-cyan-500/30"
+                    style={{
+                      borderRadius: "20px 5px 20px 5px",
+                    }}
+                  >
+                    <img
+                      src={sammy1Photo}
+                      alt="Monday Samuel"
+                      className="w-full h-full object-cover object-[center_15%]"
+                      style={{ imageRendering: "auto" }}
+                      draggable={false}
+                    />
+                  </div>
+                </div>
+                {/* Name */}
+                <h1 className="text-xl font-extrabold text-white text-center tracking-wide mb-1">
+                  Monday Samuel
+                </h1>
+                {/* Decorative line */}
+                <div className="mt-2 mb-3 mx-auto w-12 h-0.5 rounded-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+                {/* Tagline */}
+                <p className="text-gray-400 text-xs text-center tracking-wide mb-4">
+                  Software Developer building scalable web and mobile
+                  applications with modern technologies
+                </p>
+                {/* Tech Stack */}
+                <div className="flex flex-wrap justify-center gap-1.5 mb-5">
+                  {[
+                    "Flutter",
+                    "React",
+                    "HTML/CSS",
+                    "Tailwind",
+                    "Node.js",
+                    "JS",
+                    "Python",
+                  ].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-0.5 text-[10px] font-semibold rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 tracking-wide
                       transition-all duration-300 hover:scale-[1.1] hover:bg-cyan-500/20 hover:shadow-md hover:shadow-cyan-500/20"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-            {/* CTA Button */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                audio.playClickSound();
-                if (onContactClick) onContactClick();
-              }}
-              className="block w-full text-center py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                {/* CTA Button */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    audio.playClickSound();
+                    if (onContactClick) onContactClick();
+                  }}
+                  className="block w-full text-center py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25
                 hover:from-cyan-400 hover:to-blue-500 hover:shadow-cyan-400/40
                 hover:scale-[1.03] active:scale-[0.97]
                 transition-all duration-300"
-            >
-              Let's Work Together →
-            </button>
-            {/* Footer tagline */}
-            <p className="text-center text-gray-500 text-[10px] mt-4 tracking-wider uppercase">
-              Open to opportunities
-            </p>
-          </div>
-        </Html>
+                >
+                  Let's Work Together
+                </button>
+                {/* Footer tagline */}
+                <p className="text-center text-gray-500 text-[10px] mt-4 tracking-wider uppercase">
+                  Open to opportunities
+                </p>
+              </div>
+            </div>
+          </Html>
+        </group>
       )}
 
       <pointLight

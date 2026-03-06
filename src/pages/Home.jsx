@@ -185,15 +185,16 @@ const Home = () => {
               {/* Bio */}
               <div className="space-y-4">
                 <p className="text-gray-300 text-sm leading-relaxed tracking-wide">
-                  Hi, I'm Sammy! I'm a passionate developer who loves building
-                  creative and immersive web experiences. I specialize in
-                  front-end development with React, Three.js, and modern web
-                  technologies.
+                  I’m a resourceful developer who enjoys building real-world
+                  systems that solve practical problems, especially in education
+                  and productivity. My work focuses on clean architecture,
+                  secure authentication, and scalable solutions.
                 </p>
                 <p className="text-gray-300 text-sm leading-relaxed tracking-wide">
-                  I enjoy transforming ideas into interactive 3D experiences and
-                  crafting beautiful user interfaces. Feel free to explore my
-                  portfolio and reach out if you'd like to collaborate!
+                  I turn ideas into interactive web and mobile applications
+                  while crafting intuitive and visually appealing user
+                  interfaces. Feel free to explore my portfolio, and don’t
+                  hesitate to reach out if you'd like to collaborate.
                 </p>
               </div>
 
