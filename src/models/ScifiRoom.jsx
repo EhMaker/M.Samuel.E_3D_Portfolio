@@ -13,7 +13,7 @@ import * as THREE from "three";
 
 import scifiComputerRoom from "../assets/public/sci-fi_computer_room.glb";
 import sammyPhoto from "../assets/SammyW.png";
-import sammy1Photo from "../assets/Sammy1.jpg";
+import sammy1Photo from "../assets/Sammy2.png";
 import audio from "../utils/audioManager";
 
 const ScifiRoom = ({
@@ -113,43 +113,51 @@ const ScifiRoom = ({
           transform
           style={{ pointerEvents: "auto" }}
         >
-          <div className="w-[300px] bg-gradient-to-br from-blue-900/40 via-blue-800/25 to-cyan-900/30 backdrop-blur-md border border-blue-400/20 rounded-2xl p-5 shadow-2xl shadow-blue-500/10">
+          <div className="w-[300px] bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-gray-950/95 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-6 shadow-2xl shadow-cyan-500/5">
             {/* Photo with top-left and bottom-right slanty */}
             <div className="w-full flex justify-center mb-4">
               <div
-                className="w-28 h-28 overflow-hidden border-2 border-cyan-400/40 shadow-lg shadow-cyan-500/20"
+                className="w-28 h-28 overflow-hidden border-2 border-cyan-400/40 shadow-lg shadow-cyan-500/20
+                  transition-all duration-300 hover:scale-[1.06] hover:shadow-xl hover:shadow-cyan-500/30"
                 style={{
-                  clipPath:
-                    "polygon(15% 0%, 100% 0%, 100% 15%, 100% 85%, 85% 100%, 0% 100%, 0% 85%, 0% 15%)",
+                  borderRadius: "20px 5px 20px 5px",
                 }}
               >
                 <img
                   src={sammy1Photo}
-                  alt="Sammy"
-                  className="w-full h-full object-cover"
+                  alt="Monday Samuel"
+                  className="w-full h-full object-cover object-[center_15%]"
                 />
               </div>
             </div>
             {/* Name */}
             <h1 className="text-xl font-extrabold text-white text-center tracking-wide mb-1">
-              Sammy
+              Monday Samuel
             </h1>
+            {/* Decorative line */}
+            <div className="mt-2 mb-3 mx-auto w-12 h-0.5 rounded-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
             {/* Tagline */}
-            <p className="text-cyan-300 text-xs text-center font-medium mb-3">
+            <p className="text-gray-400 text-xs text-center tracking-wide mb-4">
               I build immersive 3D web experiences that captivate &amp; convert.
             </p>
             {/* Tech Stack */}
-            <div className="flex flex-wrap justify-center gap-1.5 mb-4">
-              {["React", "Three.js", "Tailwind", "Node.js", "JS"].map(
-                (tech) => (
-                  <span
-                    key={tech}
-                    className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-blue-500/15 text-cyan-200 border border-cyan-500/20 tracking-wide"
-                  >
-                    {tech}
-                  </span>
-                ),
-              )}
+            <div className="flex flex-wrap justify-center gap-1.5 mb-5">
+              {[
+                "Flutter",
+                "React",
+                "Three.js",
+                "Tailwind",
+                "Node.js",
+                "JS",
+              ].map((tech) => (
+                <span
+                  key={tech}
+                  className="px-2.5 py-0.5 text-[10px] font-semibold rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 tracking-wide
+                      transition-all duration-300 hover:scale-[1.1] hover:bg-cyan-500/20 hover:shadow-md hover:shadow-cyan-500/20"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
             {/* CTA Button */}
             <button
@@ -159,10 +167,17 @@ const ScifiRoom = ({
                 audio.playClickSound();
                 if (onContactClick) onContactClick();
               }}
-              className="block w-full text-center py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:from-cyan-400 hover:to-blue-500 hover:shadow-cyan-400/40 transition-all duration-300"
+              className="block w-full text-center py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25
+                hover:from-cyan-400 hover:to-blue-500 hover:shadow-cyan-400/40
+                hover:scale-[1.03] active:scale-[0.97]
+                transition-all duration-300"
             >
               Let's Work Together →
             </button>
+            {/* Footer tagline */}
+            <p className="text-center text-gray-500 text-[10px] mt-4 tracking-wider uppercase">
+              Open to opportunities
+            </p>
           </div>
         </Html>
       )}

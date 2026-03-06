@@ -34,9 +34,9 @@ function makeAudio(src, { volume = 1, loop = false } = {}) {
   return el;
 }
 
-let welcomeAudio = makeAudio(WELCOME_SRC, { volume: 0.6 });
-const clickAudio = makeAudio(CLICK_SRC, { volume: 0.35 });
-const sceneAudio = makeAudio(SCENE_SRC, { volume: 0.3, loop: true });
+let welcomeAudio = makeAudio(WELCOME_SRC, { volume: 0.7 });
+const clickAudio = makeAudio(CLICK_SRC, { volume: 0.6 });
+const sceneAudio = makeAudio(SCENE_SRC, { volume: 1.0, loop: true });
 
 /* ── Global unlock / activation gate ───────────────────────── */
 let unlocked = false;

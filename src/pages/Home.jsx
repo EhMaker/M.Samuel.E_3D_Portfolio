@@ -208,85 +208,133 @@ const Home = () => {
 
       {/* Skills Overlay */}
       {showSkills && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="bg-gray-900/90 border border-cyan-500/30 rounded-2xl p-8 max-w-2xl w-full mx-4 shadow-2xl shadow-cyan-500/10 text-white relative">
+        <section
+          className="absolute inset-0 z-20 flex items-center justify-center bg-black/70 backdrop-blur-md"
+          role="dialog"
+          aria-modal="true"
+          aria-label="My skills"
+        >
+          <div className="relative w-full max-w-2xl mx-4">
+            {/* Close button */}
             <button
               onClick={handleCloseSection}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-bold transition-colors"
+              aria-label="Close skills section"
+              className="absolute -top-2 -right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-gray-800/80 border border-gray-600/40 text-gray-400 hover:text-white hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 text-lg font-bold"
             >
               &times;
             </button>
-            <h2 className="text-3xl font-bold mb-6 text-cyan-400">My Skills</h2>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Frontend */}
-              <div className="space-y-3">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-cyan-400/70 border-b border-cyan-500/20 pb-2">
-                  Frontend
-                </h3>
-                <div className="flex flex-wrap gap-1.5">
-                  {["React", "HTML", "CSS", "JavaScript", "Flutter"].map(
-                    (s) => (
+            {/* Card */}
+            <div className="bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-gray-950/95 border border-cyan-500/20 rounded-2xl p-8 shadow-2xl shadow-cyan-500/5">
+              {/* Header */}
+              <header className="text-center mb-8">
+                <h2 className="text-2xl font-extrabold text-white tracking-wide mb-1">
+                  My Skills
+                </h2>
+                <p className="text-gray-400 text-xs tracking-wide">
+                  Technologies &amp; concepts I work with
+                </p>
+                {/* Decorative line */}
+                <div className="mt-4 mx-auto w-16 h-0.5 rounded-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+              </header>
+
+              <div className="grid md:grid-cols-3 gap-6">
+                {/* Frontend */}
+                <div
+                  className="group relative flex flex-col items-center gap-3 p-5 rounded-xl
+                    bg-gray-800/40 border border-gray-700/40 hover:border-cyan-400/60
+                    transition-all duration-300 ease-out
+                    hover:bg-gray-800/70 hover:shadow-xl hover:shadow-cyan-500/15
+                    hover:-translate-y-1 hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-white/[0.03] via-transparent to-transparent" />
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-cyan-400/70 border-b border-cyan-500/20 pb-2 w-full text-center">
+                    Frontend
+                  </h3>
+                  <div className="flex flex-wrap justify-center gap-1.5">
+                    {["React", "HTML", "CSS", "JavaScript", "Flutter"].map(
+                      (s) => (
+                        <span
+                          key={s}
+                          className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 tracking-wide"
+                        >
+                          {s}
+                        </span>
+                      ),
+                    )}
+                  </div>
+                  <p className="text-gray-400 text-xs leading-relaxed tracking-wide text-center">
+                    Responsive interfaces &amp; cross-platform mobile
+                    experiences.
+                  </p>
+                </div>
+
+                {/* Backend / Cloud */}
+                <div
+                  className="group relative flex flex-col items-center gap-3 p-5 rounded-xl
+                    bg-gray-800/40 border border-gray-700/40 hover:border-blue-400/60
+                    transition-all duration-300 ease-out
+                    hover:bg-gray-800/70 hover:shadow-xl hover:shadow-blue-500/15
+                    hover:-translate-y-1 hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-white/[0.03] via-transparent to-transparent" />
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-cyan-400/70 border-b border-cyan-500/20 pb-2 w-full text-center">
+                    Backend / Cloud
+                  </h3>
+                  <div className="flex flex-wrap justify-center gap-1.5">
+                    {["Python", "Firebase", "Supabase"].map((s) => (
                       <span
                         key={s}
-                        className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20"
+                        className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20 tracking-wide"
                       >
                         {s}
                       </span>
-                    ),
-                  )}
+                    ))}
+                  </div>
+                  <p className="text-gray-400 text-xs leading-relaxed tracking-wide text-center">
+                    Scalable services, real-time data &amp; authentication.
+                  </p>
                 </div>
-                <p className="text-gray-400 text-xs leading-relaxed">
-                  Responsive interfaces &amp; cross-platform mobile experiences.
-                </p>
+
+                {/* Architecture & Concepts */}
+                <div
+                  className="group relative flex flex-col items-center gap-3 p-5 rounded-xl
+                    bg-gray-800/40 border border-gray-700/40 hover:border-emerald-400/60
+                    transition-all duration-300 ease-out
+                    hover:bg-gray-800/70 hover:shadow-xl hover:shadow-emerald-500/15
+                    hover:-translate-y-1 hover:scale-[1.03] active:scale-[0.98]"
+                >
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-white/[0.03] via-transparent to-transparent" />
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-cyan-400/70 border-b border-cyan-500/20 pb-2 w-full text-center">
+                    Architecture
+                  </h3>
+                  <ul className="space-y-1.5 w-full">
+                    {[
+                      "API-driven development",
+                      "Clean client–server design",
+                      "State management patterns",
+                      "Secure auth flows",
+                      "Responsive & adaptive UI",
+                    ].map((c) => (
+                      <li
+                        key={c}
+                        className="flex items-start gap-1.5 text-gray-300 text-xs leading-relaxed tracking-wide"
+                      >
+                        <span className="text-cyan-400 mt-0.5">▸</span>
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              {/* Backend / Cloud */}
-              <div className="space-y-3">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-cyan-400/70 border-b border-cyan-500/20 pb-2">
-                  Backend / Cloud
-                </h3>
-                <div className="flex flex-wrap gap-1.5">
-                  {["Python", "Firebase", "Supabase"].map((s) => (
-                    <span
-                      key={s}
-                      className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-                <p className="text-gray-400 text-xs leading-relaxed">
-                  Scalable services, real-time data &amp; authentication.
-                </p>
-              </div>
-
-              {/* Architecture & Concepts */}
-              <div className="space-y-3">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-cyan-400/70 border-b border-cyan-500/20 pb-2">
-                  Architecture
-                </h3>
-                <ul className="space-y-1.5">
-                  {[
-                    "API-driven development",
-                    "Clean client–server design",
-                    "State management patterns",
-                    "Secure auth flows",
-                    "Responsive & adaptive UI",
-                  ].map((c) => (
-                    <li
-                      key={c}
-                      className="flex items-start gap-1.5 text-gray-300 text-xs leading-relaxed"
-                    >
-                      <span className="text-cyan-400 mt-0.5">▸</span>
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {/* Footer tagline */}
+              <p className="text-center text-gray-500 text-[10px] mt-6 tracking-wider uppercase">
+                Always learning, always building
+              </p>
             </div>
           </div>
-        </div>
+        </section>
       )}
 
       {/* Projects Overlay */}
