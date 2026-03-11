@@ -18,46 +18,100 @@ useGLTF.preload(scifiComputerRoom);
 
 const projects = [
   {
-    name: "3D Portfolio Website",
+    name: "AFROCRIB Restaurant Ordering & Management Platform",
     description:
-      "An immersive, interactive portfolio built with Three.js and React, featuring a sci-fi themed 3D environment.",
+      "AFROCRIB is a modern restaurant web application designed to deliver a smooth digital food-ordering experience. It combines a visually engaging storefront with customer authentication, cart and checkout flows, a user dashboard, and an admin panel for managing menu items, features, and blog content.",
     problem:
-      "Traditional portfolio websites lack engagement and fail to showcase creative development skills in an interactive way.",
+      "Many food businesses struggle with presenting their menu professionally online, managing customer access, and updating content quickly without depending on complex systems. The need was to create a simple but polished platform that could showcase meals, support customer interaction, and make basic content management easier.",
     solution:
-      "Built a fully interactive 3D room that users can explore, with clickable objects that reveal different sections — creating a memorable, gamified portfolio experience.",
+      "This project solves that by providing a responsive multi-page restaurant website with a complete customer journey—from discovering meals to adding items to cart and checking out. It also includes secure authentication, a protected user dashboard, and an admin interface that allows menu and content updates in a practical, lightweight way.",
+    technologies: [
+      "HTML5",
+      "CSS3",
+      "Vanilla JavaScript",
+      "Supabase Authentication",
+      "Supabase SQL setup",
+      "LocalStorage",
+      "Font Awesome",
+      "Responsive Web Design",
+    ],
+    role: "Full-Stack Dev",
+    links: {
+      demo: "https://ehmaker.github.io/AfroCrib-Restaurant/index.html",
+      repo: "https://github.com/EhMaker/AfroCrib-Restaurant",
+    },
+    screenshots: [
+      "/screenshots/afrocrib/HeroSection.png",
+      "/screenshots/afrocrib/featureSection.png",
+      "/screenshots/afrocrib/MenuSection.png",
+      "/screenshots/afrocrib/CartPage.png",
+      "/screenshots/afrocrib/DeliverySection.png",
+      "/screenshots/afrocrib/AdminDashboard.png",
+      "/screenshots/afrocrib/CustomerDashboard.png",
+      "/screenshots/afrocrib/FooterSection.png",
+    ],
+  },
+  {
+    name: "Class Manager Mobile App",
+    description:
+      "A role-based mobile classroom management app built to improve how lecturers and students interact in an academic environment. The app provides a structured digital space for classroom coordination, with separate experiences for lecturers and students, and a foundation for features like authentication, learning materials, live session updates, and attendance reporting.",
+    problem:
+      "Classroom communication and coordination are often spread across multiple channels, making it difficult for lecturers to manage sessions efficiently and for students to stay updated with materials, attendance, and live class activity. This creates delays, confusion, and unnecessary administrative stress.",
+    solution:
+      "Class Manager brings key classroom activities into one mobile platform. It is designed to give lecturers a central place to manage academic interactions, while giving students quick access to important learning information through a simple and organized interface. The app uses a scalable backend structure to support secure access, role-based navigation, and future classroom automation features.",
+    technologies: [
+      "Flutter",
+      "Dart",
+      "Firebase Core",
+      "Firebase Authentication",
+      "Cloud Firestore",
+      "Provider",
+      "Local Auth",
+      "Connectivity Plus",
+      "WiFi IoT",
+      "Android Intent Plus",
+    ],
+    role: "Designed and developed the application as an end-to-end mobile project. This included planning the app structure, building the Flutter interface, setting up Firebase integration, and creating the foundation for role-based user flows for both lecturers and students.",
+    links: { demo: "#", repo: "https://github.com/sammy/3d-portfolio" },
+    screenshots: [
+      "/screenshots/classmanager/WelcomePage.png",
+      "/screenshots/classmanager/Loginpage.png",
+      "/screenshots/classmanager/SignupPage.png",
+      "/screenshots/classmanager/StudentDashboard.png",
+      "/screenshots/classmanager/LecturerDashboard.png",
+      "/screenshots/classmanager/Join_course_page.png",
+      "/screenshots/classmanager/Course_Detail_Page.png",
+      "/screenshots/classmanager/Student_detecting_Session.png",
+      "/screenshots/classmanager/Attendance_Session.png",
+    ],
+  },
+  {
+    name: "MovieTray",
+    description:
+      "A modern movie discovery web application that helps users search, filter, and explore films in a clean, responsive interface. It also supports trailer viewing and a favorites feature, making it easier for users to discover and revisit movies they care about.",
+    problem:
+      "Finding movies online can be overwhelming when users are presented with too much information and too little personalization. Many platforms make it difficult to quickly narrow results, preview content, and keep track of interesting titles.This project was built to solve that by creating a simpler and more focused movie browsing experience with search, filtering, trailer access, and favorites management.",
+    solution:
+      "CineScope provides a user-friendly interface for movie exploration by combining: Search and filtering for faster movie discovery, Movie cards for clean content presentation, Trailer viewing for quick previews, Favorites functionality for saving preferred movies, API-driven movie data. The result is a responsive and visually engaging application that improves the movie discovery process while keeping the experience intuitive and enjoyable.",
     technologies: [
       "React",
-      "Three.js",
-      "React Three Fiber",
-      "Tailwind CSS",
       "Vite",
+      "JavaScript(JSX)",
+      "Context API",
+      "CSS3",
+      "API Integration",
+      "ESLint",
     ],
-    role: "Full-Stack Developer — designed the 3D scene, implemented interactive meshes, camera animations, and responsive UI overlays.",
-    links: { demo: "#", repo: "https://github.com/sammy/3d-portfolio" },
-  },
-  {
-    name: "E-Commerce Dashboard",
-    description:
-      "A real-time analytics dashboard for tracking sales, inventory, and customer insights.",
-    problem:
-      "Business owners struggled to get a unified view of their store metrics across multiple platforms.",
-    solution:
-      "Created a centralized dashboard with real-time data visualization, filtering, and export capabilities — reducing decision-making time by 40%.",
-    technologies: ["React", "Node.js", "Chart.js", "MongoDB", "Express"],
-    role: "Frontend Lead — built the UI components, data visualization charts, and integrated REST APIs.",
-    links: { demo: "#", repo: "https://github.com/sammy/ecommerce-dashboard" },
-  },
-  {
-    name: "Task Management App",
-    description:
-      "A collaborative task manager with real-time updates, drag-and-drop boards, and team features.",
-    problem:
-      "Small teams needed a lightweight, intuitive project management tool without the complexity of enterprise solutions.",
-    solution:
-      "Built a Kanban-style board with real-time sync, role-based access, and smart notifications — adopted by 3 teams within the first month.",
-    technologies: ["React", "Firebase", "Tailwind CSS", "Framer Motion"],
     role: "Solo Developer — handled full design, development, deployment, and user testing.",
-    links: { demo: "#", repo: "https://github.com/sammy/task-manager" },
+    links: {
+      demo: "https://ehmaker.github.io/movie-searchengine/#/",
+      repo: "https://github.com/EhMaker/movie-searchengine",
+    },
+    screenshots: [
+      "/screenshots/Movietray/HomePage.png",
+      "/screenshots/Movietray/FavoritesPage.png",
+      "/screenshots/Movietray/Screenshot_1.png",
+    ],
   },
 ];
 
@@ -253,16 +307,22 @@ const Home = () => {
                     Frontend
                   </h3>
                   <div className="flex flex-wrap justify-center gap-1.5">
-                    {["React", "HTML", "CSS", "JavaScript", "Flutter"].map(
-                      (s) => (
-                        <span
-                          key={s}
-                          className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 tracking-wide"
-                        >
-                          {s}
-                        </span>
-                      ),
-                    )}
+                    {[
+                      "React",
+                      "HTML",
+                      "CSS",
+                      "Tailwind CSS",
+                      "Three.js",
+                      "JavaScript",
+                      "Flutter",
+                    ].map((s) => (
+                      <span
+                        key={s}
+                        className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 tracking-wide"
+                      >
+                        {s}
+                      </span>
+                    ))}
                   </div>
                   <p className="text-gray-400 text-xs leading-relaxed tracking-wide text-center">
                     Responsive interfaces &amp; cross-platform mobile
@@ -283,7 +343,7 @@ const Home = () => {
                     Backend / Cloud
                   </h3>
                   <div className="flex flex-wrap justify-center gap-1.5">
-                    {["Python", "Firebase", "Supabase"].map((s) => (
+                    {["Python", "Firebase", "Supabase", "Node.js"].map((s) => (
                       <span
                         key={s}
                         className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20 tracking-wide"
