@@ -128,31 +128,78 @@ const Home = () => {
   const [zoomTarget, setZoomTarget] = useState(null);
   const [zoomAction, setZoomAction] = useState(null);
   const zoomedInRef = React.useRef(false);
+  const interactionLockRef = React.useRef(false);
 
-  const monitorTarget = new THREE.Vector3(-1.3, 0.35, 1.9);
-  const posterTarget = new THREE.Vector3(-1.4, 0.7, 1.2);
+  const monitorTarget = React.useMemo(
+    () => new THREE.Vector3(-1.3, 0.35, 1.9),
+    [],
+  );
+  const posterTarget = React.useMemo(
+    () => new THREE.Vector3(-1.4, 0.7, 1.2),
+    [],
+  );
+  const keyboardTarget = React.useMemo(
+    () => new THREE.Vector3(-1.12, 0.2, 1.82),
+    [],
+  );
+
+  const beginZoomToSection = useCallback(
+    (target, action) => {
+      if (
+        interactionLockRef.current ||
+        zooming ||
+        returning ||
+        introPlaying ||
+        !introComplete ||
+        showAbout ||
+        showSkills ||
+        showProjects ||
+        showContact
+      ) {
+        return;
+      }
+      interactionLockRef.current = true;
+      setZoomTarget(target);
+      setZoomAction(action);
+      setZooming(true);
+    },
+    [
+      zooming,
+      returning,
+      introPlaying,
+      introComplete,
+      showAbout,
+      showSkills,
+      showProjects,
+      showContact,
+    ],
+  );
 
   const handleMonitorClick = useCallback(() => {
     audio.playClickSound();
-    setZoomTarget(monitorTarget);
-    setZoomAction("projects");
-    setZooming(true);
-  }, []);
+    beginZoomToSection(monitorTarget, "projects");
+  }, [beginZoomToSection, monitorTarget]);
 
   const handlePosterClick = useCallback(() => {
     audio.playClickSound();
-    setZoomTarget(posterTarget);
-    setZoomAction("about");
-    setZooming(true);
-  }, []);
+    beginZoomToSection(posterTarget, "about");
+  }, [beginZoomToSection, posterTarget]);
+
+  const handleKeyboardClick = useCallback(() => {
+    audio.playClickSound();
+    beginZoomToSection(keyboardTarget, "skills");
+  }, [beginZoomToSection, keyboardTarget]);
 
   const handleZoomComplete = useCallback(() => {
     setZooming(false);
     zoomedInRef.current = true;
+    interactionLockRef.current = false;
     if (zoomAction === "projects") {
       setShowProjects(true);
     } else if (zoomAction === "about") {
       setShowAbout(true);
+    } else if (zoomAction === "skills") {
+      setShowSkills(true);
     }
   }, [zoomAction]);
 
@@ -164,14 +211,18 @@ const Home = () => {
     setShowProjects(false);
     setShowContact(false);
     if (zoomedInRef.current) {
+      interactionLockRef.current = true;
       setReturning(true);
       zoomedInRef.current = false;
+    } else {
+      interactionLockRef.current = false;
     }
   }, []);
 
   /* Called when the camera finishes animating back to the saved state */
   const handleReturnComplete = useCallback(() => {
     setReturning(false);
+    interactionLockRef.current = false;
   }, []);
 
   /* Promise that resolves when the WelcomeLoader fully finishes.
@@ -199,8 +250,21 @@ const Home = () => {
     setIntroComplete(true);
   }, []);
 
+  const overlayAnimStyles = `
+@keyframes skillsOverlayFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes skillsCardSlideUp {
+  0% { opacity: 0; transform: translateY(18px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+`;
+
   return (
     <section className="w-full h-screen relative">
+      <style>{overlayAnimStyles}</style>
+
       {/* Welcome / Loading overlay — sits ABOVE the Canvas */}
       {!sceneReady && <WelcomeLoader onComplete={handleWelcomeComplete} />}
 
@@ -265,11 +329,18 @@ const Home = () => {
       {showSkills && (
         <section
           className="absolute inset-0 z-20 flex items-center justify-center bg-black/70 backdrop-blur-md"
+          style={{ animation: "skillsOverlayFadeIn 0.35s ease-out both" }}
           role="dialog"
           aria-modal="true"
           aria-label="My skills"
         >
-          <div className="relative w-full max-w-2xl mx-4">
+          <div
+            className="relative w-full max-w-2xl mx-4"
+            style={{
+              animation:
+                "skillsCardSlideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both",
+            }}
+          >
             {/* Close button */}
             <button
               onClick={handleCloseSection}
@@ -509,10 +580,7 @@ const Home = () => {
           <ScifiRoom
             onPosterClick={handlePosterClick}
             onMonitorClick={handleMonitorClick}
-            onKeyboardClick={() => {
-              audio.playClickSound();
-              setShowSkills(true);
-            }}
+            onKeyboardClick={handleKeyboardClick}
             onContactClick={() => {
               setShowContact(true);
             }}
