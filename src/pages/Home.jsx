@@ -9,7 +9,6 @@ import ProjectsSection from "../components/ProjectsSection";
 import ScifiRoom from "../models/ScifiRoom";
 import WelcomeLoader from "../components/WelcomeLoader";
 import audio from "../utils/audioManager";
-import sammyPhoto from "../assets/Sammy1.jpg";
 import * as THREE from "three";
 import scifiComputerRoom from "../assets/public/sci-fi_computer_room.glb";
 
@@ -24,7 +23,7 @@ const projects = [
     problem:
       "Many food businesses struggle with presenting their menu professionally online, managing customer access, and updating content quickly without depending on complex systems. The need was to create a simple but polished platform that could showcase meals, support customer interaction, and make basic content management easier.",
     solution:
-      "This project solves that by providing a responsive multi-page restaurant website with a complete customer journey—from discovering meals to adding items to cart and checking out. It also includes secure authentication, a protected user dashboard, and an admin interface that allows menu and content updates in a practical, lightweight way.",
+      "This project solves that by providing a responsive multi-page restaurant website with a complete customer journey; from discovering meals to adding items to cart and checking out. It also includes secure authentication, a protected user dashboard, and an admin interface that allows menu and content updates in a practical, lightweight way.",
     technologies: [
       "HTML5",
       "CSS3",
@@ -35,7 +34,7 @@ const projects = [
       "Font Awesome",
       "Responsive Web Design",
     ],
-    role: "Full-Stack Dev",
+    role: "Full-Stack Developer. Handled all aspects of design, frontend development, backend setup, and deployment.",
     links: {
       demo: "https://ehmaker.github.io/AfroCrib-Restaurant/index.html",
       repo: "https://github.com/EhMaker/AfroCrib-Restaurant",
