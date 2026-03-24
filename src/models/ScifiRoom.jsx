@@ -12,7 +12,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 import scifiComputerRoom from "../assets/public/sci-fi_computer_room.glb";
-import sammyPhoto from "../assets/SammyW.png";
+import sammyPhoto from "../assets/SammyW.webp";
 import sammy1Photo from "../assets/Sammy2.png";
 import audio from "../utils/audioManager";
 
