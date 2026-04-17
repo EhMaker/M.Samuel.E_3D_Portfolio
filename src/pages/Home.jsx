@@ -491,7 +491,7 @@ const Home = () => {
           position: [2, 12, 10],
           fov: 35,
         }}
-        dpr={[1, 1.5]}
+        dpr={[1, 2]}
         performance={{ min: 0.5 }}
         gl={{
           alpha: false,
@@ -562,6 +562,7 @@ const Home = () => {
             enableZoom
             enablePan
             enableRotate
+            enableDamping={false}
             enabled={!zooming && !returning && !introPlaying && introComplete}
           />
           <CameraIntro

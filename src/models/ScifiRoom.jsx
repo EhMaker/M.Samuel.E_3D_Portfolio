@@ -6,7 +6,7 @@ Source: https://sketchfab.com/3d-models/sci-fi-computer-room-a149d5bfcef6496c9a0
 Title: Sci-Fi Computer Room
 */
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import { useGLTF, Html, useTexture } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
@@ -28,7 +28,7 @@ const ScifiRoom = ({
 }) => {
   const { nodes, materials } = useGLTF(scifiComputerRoom);
   const scifiComputerRoomRef = useRef();
-  const { scene } = useThree();
+  const { scene, gl } = useThree();
   const [hovered, setHovered] = useState(false);
   const [monitorHovered, setMonitorHovered] = useState(false);
   const [keyboardHovered, setKeyboardHovered] = useState(false);
@@ -52,6 +52,28 @@ const ScifiRoom = ({
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  // Enhance all GLTF material textures with anisotropy for sharpness
+  useEffect(() => {
+    const maxAniso = gl.capabilities.getMaxAnisotropy();
+    Object.values(materials).forEach((mat) => {
+      [
+        "map",
+        "normalMap",
+        "roughnessMap",
+        "metalnessMap",
+        "emissiveMap",
+      ].forEach((key) => {
+        const tex = mat[key];
+        if (tex) {
+          tex.anisotropy = maxAniso;
+          tex.minFilter = THREE.LinearMipmapLinearFilter;
+          tex.magFilter = THREE.LinearFilter;
+          tex.needsUpdate = true;
+        }
+      });
+    });
+  }, [materials, gl]);
 
   useEffect(() => {
     // Pure black void — no color, no skybox
@@ -96,6 +118,15 @@ const ScifiRoom = ({
       }
     }
   });
+
+  // Sharpen photo texture for high-DPI screens
+  useEffect(() => {
+    photoTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    photoTexture.magFilter = THREE.LinearFilter;
+    photoTexture.anisotropy = gl.capabilities.getMaxAnisotropy();
+    photoTexture.generateMipmaps = true;
+    photoTexture.needsUpdate = true;
+  }, [photoTexture, gl]);
 
   // Apply photo texture to a cloned Posters material
   const postersMaterial = React.useMemo(() => {
