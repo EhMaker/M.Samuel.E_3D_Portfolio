@@ -69,14 +69,12 @@ const ResumeIcon = () => (
 );
 
 const EMAILJS_SERVICE_ID =
-  import.meta.env.VITE_EMAILJS_SERVICE_ID ||
-  import.meta.env.EMAILJS_SERVICE_ID;
+  import.meta.env.VITE_EMAILJS_SERVICE_ID || import.meta.env.EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID =
   import.meta.env.VITE_EMAILJS_TEMPLATE_ID ||
   import.meta.env.EMAILJS_TEMPLATE_ID;
 const EMAILJS_PUBLIC_KEY =
-  import.meta.env.VITE_EMAILJS_PUBLIC_KEY ||
-  import.meta.env.EMAILJS_PUBLIC_KEY;
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY || import.meta.env.EMAILJS_PUBLIC_KEY;
 const FORM_ANIM_MS = 260;
 
 /* ── Contact items config ────────────────────────────────── */
@@ -274,6 +272,7 @@ const ContactSection = ({ onClose }) => {
   return (
     <section
       className="absolute inset-0 z-20 flex items-center justify-center bg-black/70 backdrop-blur-md"
+      style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
       role="dialog"
       aria-modal="true"
       aria-label="Contact and credibility"

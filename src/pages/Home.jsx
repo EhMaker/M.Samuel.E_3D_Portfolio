@@ -271,6 +271,7 @@ const Home = () => {
       {showAbout && (
         <section
           className="absolute inset-0 z-20 flex items-center justify-center bg-black/70 backdrop-blur-md"
+          style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
           role="dialog"
           aria-modal="true"
           aria-label="About me"
@@ -328,7 +329,10 @@ const Home = () => {
       {showSkills && (
         <section
           className="absolute inset-0 z-20 flex items-center justify-center bg-black/70 backdrop-blur-md"
-          style={{ animation: "skillsOverlayFadeIn 0.35s ease-out both" }}
+          style={{
+            animation: "skillsOverlayFadeIn 0.35s ease-out both",
+            paddingTop: "env(safe-area-inset-top, 0px)",
+          }}
           role="dialog"
           aria-modal="true"
           aria-label="My skills"

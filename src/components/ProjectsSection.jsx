@@ -327,6 +327,7 @@ const ProjectDetail = ({ project, index, onBack }) => {
   return (
     <div
       className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto"
+      style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
       role="dialog"
       aria-modal="true"
       aria-label={`Details for ${project.name}`}
@@ -566,7 +567,10 @@ const ProjectsSection = ({ projects, onClose }) => {
   return (
     <section
       className="absolute inset-0 z-20 flex items-center justify-center overflow-y-auto bg-black/70 backdrop-blur-md"
-      style={{ overflowX: "hidden" }}
+      style={{
+        overflowX: "hidden",
+        paddingTop: "env(safe-area-inset-top, 0px)",
+      }}
       role="dialog"
       aria-modal="true"
       aria-label="Projects showcase"
