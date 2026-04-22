@@ -566,10 +566,11 @@ const ProjectsSection = ({ projects, onClose }) => {
 
   return (
     <section
-      className="absolute inset-0 z-20 flex items-center justify-center overflow-y-auto bg-black/70 backdrop-blur-md"
+      className="absolute inset-0 z-20 flex items-start sm:items-center justify-center overflow-y-auto bg-black/70 backdrop-blur-md"
       style={{
         overflowX: "hidden",
-        paddingTop: "env(safe-area-inset-top, 0px)",
+        paddingTop: "calc(env(safe-area-inset-top, 0px) + 0.75rem)",
+        paddingBottom: "0.75rem",
       }}
       role="dialog"
       aria-modal="true"
@@ -579,12 +580,12 @@ const ProjectsSection = ({ projects, onClose }) => {
       <style>{animStyles}</style>
 
       {/* Centered wrapper — contact-section-consistent */}
-      <div className="relative w-full max-w-5xl mx-4 my-8 sm:my-12">
+      <div className="relative w-full max-w-5xl mx-4 my-4 sm:my-12">
         {/* Close button — same style as contact close */}
         <button
           onClick={onClose}
           aria-label="Close projects section"
-          className="absolute -top-2 -right-2 z-30 w-9 h-9 flex items-center justify-center
+          className="absolute top-2 right-0 sm:-top-2 sm:-right-2 z-30 w-9 h-9 flex items-center justify-center
             rounded-full bg-gray-800/80 border border-gray-600/40 text-gray-400
             hover:text-white hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20
             transition-all duration-300 text-lg font-bold"
