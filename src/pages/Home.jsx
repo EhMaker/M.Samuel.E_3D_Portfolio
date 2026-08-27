@@ -17,9 +17,9 @@ useGLTF.preload(scifiComputerRoom);
 
 const projects = [
   {
-    name: "AFROCRIB Restaurant Ordering & Management Platform",
+    name: "DeCreme Restaurant website",
     description:
-      "AFROCRIB is a modern restaurant web application designed to deliver a smooth digital food-ordering experience. It combines a visually engaging storefront with customer authentication, cart and checkout flows, a user dashboard, and an admin panel for managing menu items, features, and blog content.",
+      "DeCreme is a modern restaurant web application designed to deliver a smooth digital food-ordering experience. It combines a visually engaging storefront with customer authentication, cart and checkout flows, a user dashboard, and an admin panel for managing menu items, features, and blog content.",
     problem:
       "Many food businesses struggle with presenting their menu professionally online, managing customer access, and updating content quickly without depending on complex systems. The need was to create a simple but polished platform that could showcase meals, support customer interaction, and make basic content management easier.",
     solution:
@@ -48,6 +48,35 @@ const projects = [
       "/screenshots/afrocrib/AdminDashboard.png",
       "/screenshots/afrocrib/CustomerDashboard.png",
       "/screenshots/afrocrib/FooterSection.png",
+    ],
+  },
+  {
+    name: "SmExPay Online Banking",
+    description:
+      "A realistic online banking simulation that lets users manage virtual accounts, send and receive mock money, track transactions, and interact with banking features in a smooth, modern interface. Although no real money is involved, the system is designed to replicate the experience and behavior of a real online banking platform.",
+    problem:
+      "Many banking demonstrations focus only on the interface and fail to show how actual banking workflows, transactions, account validation, and card interactions work together",
+    solution:
+      "I built an interactive banking simulation that models realistic user flows, including account management, mock transfers, transaction history, bank detection, account validation, and debit/credit card validation—while keeping all financial activity completely simulated.",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Material UI",
+      "Material Design 3",
+      "Framer Motion",
+      "Zustand/Redux Toolkit",
+      "React Query",
+      "mock API/service layer",
+    ],
+    role: "Full-Stack Frontend Developer & System Designer — I designed the system architecture, planned the user experience, built the interface and reusable components, implemented the mock banking logic, and structured the application for scalability and maintainability",
+    links: {
+      demo: "https://ehmaker.github.io/Onlinebanking-Demo/#/cards",
+      repo: "https://github.com/EhMaker/Onlinebanking-Demo",
+    },
+    screenshots: [
+      "/screenshots/Onlinebank/DashboardOnlineBanking.png",
+      "/screenshots/Onlinebank/AccountPage.png",
+      "/screenshots/Onlinebank/CardPage.png",
     ],
   },
   {
